@@ -28,7 +28,11 @@ public class StandardWaiter {
     return waitForCondition(ExpectedConditions.visibilityOf(webElement));
   }
 
-  public boolean isVisible(List<WebElement> webElement) {
-    return waitForCondition(ExpectedConditions.visibilityOfAllElements(webElement));
+  public boolean isVisible(List<WebElement> webElements) {
+    return waitForCondition(ExpectedConditions.visibilityOfAllElements(webElements));
+  }
+
+  public boolean isClickable(WebElement webElement) {
+    return waitForCondition(ExpectedConditions.elementToBeClickable(webElement));
   }
 }

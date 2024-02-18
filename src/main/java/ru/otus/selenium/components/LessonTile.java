@@ -48,7 +48,9 @@ public class LessonTile extends AbsBaseComponent {
       webElement = tilesFilteredByName.get(0);
     }
     ((JavascriptExecutor) diScoped.getDriver()).executeScript("arguments[0].scrollIntoView();", webElement);
-    webElement.click();
+    if (standardWaiter.isClickable(webElement)) {
+      webElement.click();
+    }
     return new LessonsPage(diScoped);
   }
 
