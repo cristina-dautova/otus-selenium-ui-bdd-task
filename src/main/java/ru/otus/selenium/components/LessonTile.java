@@ -2,6 +2,7 @@ package ru.otus.selenium.components;
 
 import com.google.inject.Inject;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import ru.otus.selenium.annotations.Component;
 import ru.otus.selenium.components.staticcomponent.AbsBaseComponent;
@@ -27,7 +28,7 @@ public class LessonTile extends AbsBaseComponent {
   @Inject
   public LessonTile(DIScoped scenarioScoped) {
     super(scenarioScoped);
-    this.diScoped = new DIScoped();
+    this.diScoped = scenarioScoped.clone();
   }
 
   public LessonsPage clickLessonTile(int number) {
@@ -37,11 +38,14 @@ public class LessonTile extends AbsBaseComponent {
 
   public LessonsPage clickLessonTile(String tileName) {
     var tilesFilteredByName = getTilesByName(tileName);
+    WebElement webElement;
     if (tilesFilteredByName.size() > 1) {
-      tilesFilteredByName.get(random.nextInt(tilesFilteredByName.size())).click();
+      webElement = tilesFilteredByName.get(random.nextInt(tilesFilteredByName.size()));
     } else {
-      tilesFilteredByName.get(0).click();
+      webElement = tilesFilteredByName.get(0);
     }
+    ((JavascriptExecutor) diScoped.getDriver()).executeScript("arguments[0].scrollIntoView();", webElement);
+    webElement.click();
     return new LessonsPage(diScoped);
   }
 
@@ -63,7 +67,7 @@ public class LessonTile extends AbsBaseComponent {
   public void showExpectedCourseNameAndDate(List<CourseInfo> filteredCourses) {
     filteredCourses
         .forEach(expectedCourseItem -> {
-          System.out.println("Course name: " + expectedCourseItem.getCourseName());
+          System.out.println("\nCourse name: " + expectedCourseItem.getCourseName());
           System.out.println("Start date: " + expectedCourseItem.getDate());
         });
   }

@@ -57,9 +57,8 @@ public class PreparationLessonTile extends AbsBaseComponent {
     getAllPricesInfo()
         .stream()
         .max(Comparator.comparingInt(Map.Entry::getValue))
-        .ifPresent(maxEntry -> {
-          System.out.printf("Course with highest price: %s %s ₽", maxEntry.getKey(), maxEntry.getValue());
-        });
+        .ifPresent(maxEntry ->
+            System.out.printf("%nCourse with highest price: %s %s ₽%n", maxEntry.getKey(), maxEntry.getValue()));
   }
 
   private void getCourseInfoWithMinPrice() {
@@ -67,8 +66,7 @@ public class PreparationLessonTile extends AbsBaseComponent {
     getAllPricesInfo()
         .stream()
         .min(Comparator.comparingInt(Map.Entry::getValue))
-        .ifPresent(minEntry -> {
-          System.out.printf("%nCourse with lowest price: %s %s ₽%n", minEntry.getKey(), minEntry.getValue());
-        });
+        .ifPresent(minEntry ->
+            System.out.printf("%nCourse with lowest price: %s %s ₽%n", minEntry.getKey(), minEntry.getValue()));
   }
 }

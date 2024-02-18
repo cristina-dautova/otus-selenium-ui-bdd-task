@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ScenarioScoped
-public class DIScoped {
+public class DIScoped implements Cloneable {
 
   @Getter
   @Setter
@@ -29,5 +29,16 @@ public class DIScoped {
 
   public List<CourseInfo> getCoursesInfo() {
     return new ArrayList<>(coursesInfo);
+  }
+
+  @Override
+  public DIScoped clone() {
+    try {
+      DIScoped clone = (DIScoped) super.clone();
+      // TODO: copy mutable state here, so the clone can't change the internals of the original
+      return clone;
+    } catch (CloneNotSupportedException e) {
+      throw new AssertionError();
+    }
   }
 }

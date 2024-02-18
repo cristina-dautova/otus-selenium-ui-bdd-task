@@ -18,7 +18,6 @@ public class LessonTileSteps {
   @Inject
   public DIScoped diScoped;
 
-
   @When("I click course tile {int}")
   public void clickLessonByNumber(int number) {
     diScoped.setLessonTitle(lessonTile.getLessonTitle(number));
