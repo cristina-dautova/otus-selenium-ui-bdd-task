@@ -69,10 +69,8 @@ public class LessonTile extends AbsBaseComponent {
 
   public void showExpectedCourseNameAndDate(List<CourseInfo> filteredCourses) {
     filteredCourses
-        .forEach(expectedCourseItem -> {
-          LOGGER.info("Course name: " + expectedCourseItem.getCourseName() + "\n"
-              + "Start date: " + expectedCourseItem.getDate());
-        });
+        .forEach(expectedCourseItem -> LOGGER.info("Course name: " + expectedCourseItem.getCourseName() + "\n"
+            + "Start date: " + expectedCourseItem.getDate()));
   }
   public List<CourseInfo> findCoursesAfterSpecificDate(String startDate) {
 
