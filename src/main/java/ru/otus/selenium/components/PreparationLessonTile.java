@@ -1,6 +1,8 @@
 package ru.otus.selenium.components;
 
 import com.google.inject.Inject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import ru.otus.selenium.annotations.Component;
 import ru.otus.selenium.components.staticcomponent.AbsBaseComponent;
@@ -12,6 +14,8 @@ import java.util.stream.Collectors;
 
 @Component("div a[href*='/online/']")
 public class PreparationLessonTile extends AbsBaseComponent {
+
+  private static final Logger logger = LogManager.getLogger(PreparationLessonTile.class);
 
   @Inject
   public PreparationLessonTile(DIScoped scenarioScoped) {
@@ -58,7 +62,8 @@ public class PreparationLessonTile extends AbsBaseComponent {
         .stream()
         .max(Comparator.comparingInt(Map.Entry::getValue))
         .ifPresent(maxEntry ->
-            System.out.printf("%nCourse with highest price: %s %s ₽%n", maxEntry.getKey(), maxEntry.getValue()));
+                logger
+                    .info(String.format("Course with highest price: %s %s ₽", maxEntry.getKey(), maxEntry.getValue())));
   }
 
   private void getCourseInfoWithMinPrice() {
@@ -67,6 +72,6 @@ public class PreparationLessonTile extends AbsBaseComponent {
         .stream()
         .min(Comparator.comparingInt(Map.Entry::getValue))
         .ifPresent(minEntry ->
-            System.out.printf("%nCourse with lowest price: %s %s ₽%n", minEntry.getKey(), minEntry.getValue()));
+            logger.info(String.format("Course with lowest price: %s %s ₽", minEntry.getKey(), minEntry.getValue())));
   }
 }

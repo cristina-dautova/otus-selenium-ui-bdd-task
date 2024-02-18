@@ -1,6 +1,8 @@
 package ru.otus.selenium.components;
 
 import com.google.inject.Inject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -22,8 +24,9 @@ import java.util.stream.Collectors;
 @Component("section h2 ~ div a[href*='/lessons/']")
 public class LessonTile extends AbsBaseComponent {
 
+  private static final Logger logger = LogManager.getLogger(LessonTile.class);
   private final DIScoped diScoped;
-  private Random random = new Random();
+  private final Random random = new Random();
 
   @Inject
   public LessonTile(DIScoped scenarioScoped) {
@@ -67,8 +70,8 @@ public class LessonTile extends AbsBaseComponent {
   public void showExpectedCourseNameAndDate(List<CourseInfo> filteredCourses) {
     filteredCourses
         .forEach(expectedCourseItem -> {
-          System.out.println("\nCourse name: " + expectedCourseItem.getCourseName());
-          System.out.println("Start date: " + expectedCourseItem.getDate());
+          logger.info("Course name: " + expectedCourseItem.getCourseName() + "\n"
+              + "Start date: " + expectedCourseItem.getDate());
         });
   }
   public List<CourseInfo> findCoursesAfterSpecificDate(String startDate) {
