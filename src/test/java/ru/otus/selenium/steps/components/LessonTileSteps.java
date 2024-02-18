@@ -3,13 +3,9 @@ package ru.otus.selenium.steps.components;
 import com.google.inject.Inject;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import lombok.Getter;
-import lombok.Setter;
-import ru.otus.selenium.components.CourseInfo;
 import ru.otus.selenium.components.LessonTile;
 import ru.otus.selenium.support.DIScoped;
 
-import java.util.List;
 
 public class LessonTileSteps {
 
