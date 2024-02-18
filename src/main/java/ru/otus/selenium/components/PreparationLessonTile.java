@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Component("div a[href*='/online/']")
 public class PreparationLessonTile extends AbsBaseComponent {
 
-  private static final Logger logger = LogManager.getLogger(PreparationLessonTile.class);
+  private static final Logger LOGGER = LogManager.getLogger(PreparationLessonTile.class);
 
   @Inject
   public PreparationLessonTile(DIScoped scenarioScoped) {
@@ -62,7 +62,7 @@ public class PreparationLessonTile extends AbsBaseComponent {
         .stream()
         .max(Comparator.comparingInt(Map.Entry::getValue))
         .ifPresent(maxEntry ->
-                logger
+                LOGGER
                     .info(String.format("Course with highest price: %s %s ₽", maxEntry.getKey(), maxEntry.getValue())));
   }
 
@@ -72,6 +72,6 @@ public class PreparationLessonTile extends AbsBaseComponent {
         .stream()
         .min(Comparator.comparingInt(Map.Entry::getValue))
         .ifPresent(minEntry ->
-            logger.info(String.format("Course with lowest price: %s %s ₽", minEntry.getKey(), minEntry.getValue())));
+            LOGGER.info(String.format("Course with lowest price: %s %s ₽", minEntry.getKey(), minEntry.getValue())));
   }
 }

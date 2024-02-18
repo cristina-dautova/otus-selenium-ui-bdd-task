@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Component("section h2 ~ div a[href*='/lessons/']")
 public class LessonTile extends AbsBaseComponent {
 
-  private static final Logger logger = LogManager.getLogger(LessonTile.class);
+  private static final Logger LOGGER = LogManager.getLogger(LessonTile.class);
   private final DIScoped diScoped;
   private final Random random = new Random();
 
@@ -70,7 +70,7 @@ public class LessonTile extends AbsBaseComponent {
   public void showExpectedCourseNameAndDate(List<CourseInfo> filteredCourses) {
     filteredCourses
         .forEach(expectedCourseItem -> {
-          logger.info("Course name: " + expectedCourseItem.getCourseName() + "\n"
+          LOGGER.info("Course name: " + expectedCourseItem.getCourseName() + "\n"
               + "Start date: " + expectedCourseItem.getDate());
         });
   }
@@ -78,14 +78,14 @@ public class LessonTile extends AbsBaseComponent {
 
     var specificDate = parseDate(startDate);
 
-    var regex = "^\u0421 (\\d{1,2} [\u0430-\u044f]+)";
+    var regex = "^С (\\d{1,2} [а-я]+)";
     var pattern = Pattern.compile(regex);
 
     List<CourseInfo> filteredCourseInfoItems = new ArrayList<>();
 
     for (WebElement tile : getComponentsEntity()) {
 
-      var calendarWebElement = tile.findElement(By.xpath(".//span[starts-with(text(),'\u0421 ')]"));
+      var calendarWebElement = tile.findElement(By.xpath(".//span[starts-with(text(),'С ')]"));
       var courseNameWebElement = tile.findElement(By.xpath(".//h5"));
 
       var matcher = pattern.matcher(calendarWebElement.getText());
